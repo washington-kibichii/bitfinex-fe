@@ -19,6 +19,7 @@
         fetch('/fetch-local-prices')
         .then(res => res.json())
         .then((data) => {
+          data = JSON.parse(JSON.stringify(data))
           this.setState({ prices: data })
         }) 
         .catch(console.log)
