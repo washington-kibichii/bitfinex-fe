@@ -2,6 +2,13 @@
 
     import React, {Component} from 'react';
     import Prices from './components/prices';
+    import TimeAgo from 'javascript-time-ago'
+
+    import en from 'javascript-time-ago/locale/en'
+    import ru from 'javascript-time-ago/locale/ru'
+
+    TimeAgo.addDefaultLocale(en)
+    TimeAgo.addLocale(ru)
 
     class App extends Component {
       state = {
@@ -9,16 +16,16 @@
       }
       componentDidMount() {
         
-        fetch('https://cors-anywhere.herokuapp.com/http://localhost:8080/fetch-local-prices')
+        fetch('/fetch-local-prices')
         .then(res => res.json())
         .then((data) => {
           this.setState({ prices: data })
-        })
+        }) 
         .catch(console.log)
       }
       render() {
         return (
-          <Prices contacts={this.state.prices} />
+          <Prices prices={this.state.prices} />
         );
       }
     }
